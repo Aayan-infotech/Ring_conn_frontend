@@ -1,0 +1,23 @@
+.home-section-3 {
+  background-image: url('./images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-section-3 .subheading {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+.home-section-3 .discount-text {
+  font-size: 2rem;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.banner-img {
+width: 100%;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
+}

@@ -1,0 +1,128 @@
+/* Login.css */
+
+.left-panel-register {
+  /* background: linear-gradient(135deg, #242424, #ffba53); */
+  background-image: url(https://img.freepik.com/free-vector/abstract-blue-light-pipe-speed-zoom-black-background-technology_1142-9980.jpg?uid=R187744377&ga=GA1.1.2076956031.1739515128&semt=ais_hybrid&w=740);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50%;
+  color: #fff;
+}
+
+.right-panel-regsiter {
+  background-color: #fff;
+}
+
+.btn-orange {
+  background-color: #000000;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #e6a900;
+}
+
+.text-orange {
+  color: #ff6a00;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+
+  .d-flex.vh-100 {
+    flex-direction: column-reverse !important;
+    height: auto;
+  }
+  .left-panel-register,
+  .right-panel-register {
+    width: 100%;
+  }
+
+  .left-panel-register {
+    height: 50vh;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .right-panel-register {
+    height: 50vh;
+    padding: 2rem;
+  }
+
+  .illustration img {
+    max-height: 120px;
+  }
+
+  .form-control {
+    width: 100% !important;
+  }
+
+  .btn-orange {
+    width: 100%;
+  }
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1055;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.custom-modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.btn-orange {
+  background-color: #ff6600;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #e65c00;
+}

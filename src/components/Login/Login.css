@@ -1,0 +1,85 @@
+/* Login.css */
+
+.left-panel {
+  /* background: linear-gradient(135deg, #242424, #ffba53); */
+  background-image: url(https://img.freepik.com/free-vector/abstract-blue-light-pipe-speed-zoom-black-background-technology_1142-9980.jpg?uid=R187744377&ga=GA1.1.2076956031.1739515128&semt=ais_hybrid&w=740);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50%;
+  color: #fff;
+}
+
+.right-panel {
+  background-color: #fff;
+  width: 50%;
+}
+
+.btn-orange {
+  background-color: #000000;
+  border: none;
+}
+
+.btn-orange:hover {
+  background-color: #e6a900;
+}
+
+.text-orange {
+  color: #ff6a00;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+
+  .d-flex.vh-100 {
+    flex-direction: column-reverse !important;
+    height: auto;
+  }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+  }
+
+  .left-panel {
+    height: 50vh;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .right-panel {
+    height: 50vh;
+    padding: 2rem;
+  }
+
+  .illustration img {
+    max-height: 120px;
+  }
+
+  .form-control {
+    width: 100% !important;
+  }
+
+  .btn-orange {
+    width: 100%;
+  }
+  .social-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}

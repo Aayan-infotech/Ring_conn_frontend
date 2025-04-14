@@ -1,0 +1,169 @@
+/* Contact.css */
+.flightmantra-contact-wrapper {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  padding: 4rem 0;
+}
+
+.flightmantra-contact-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.flightmantra-contact-container:hover {
+  transform: translateY(-5px);
+}
+
+.flightmantra-contact-form-section {
+  padding: 3rem;
+  background: #ffffff;
+}
+
+.flightmantra-contact-info-section {
+  padding: 3rem;
+  background: linear-gradient(135deg, #000000 0%, #b3a700 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.flightmantra-contact-info-section::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.flightmantra-contact-info-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  right: -30px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.flightmantra-contact-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  position: relative;
+}
+
+.flightmantra-contact-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: #4a6bff;
+  border-radius: 2px;
+}
+
+.flightmantra-info-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.flightmantra-contact-description {
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.flightmantra-form-label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.flightmantra-form-control {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s;
+}
+
+.flightmantra-form-control:focus {
+  border-color: #4a6bff;
+  box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+}
+
+.flightmantra-btn-send {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.flightmantra-btn-send:hover {
+  background: #d3be00;
+  transform: translateY(-2px);
+}
+
+.flightmantra-contact-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.flightmantra-contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.flightmantra-contact-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.flightmantra-contact-text {
+  font-size: 1rem;
+}
+
+.flightmantra-info-box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .flightmantra-contact-form-section, 
+  .flightmantra-contact-info-section {
+    padding: 2rem;
+  }
+  
+  .flightmantra-contact-title {
+    font-size: 2rem;
+  }
+  
+  .flightmantra-info-title {
+    font-size: 1.8rem;
+  }
+}
