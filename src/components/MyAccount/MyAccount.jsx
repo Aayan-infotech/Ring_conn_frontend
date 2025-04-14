@@ -1,4 +1,3 @@
-// MyAccount.jsx
 import React, { useState, useEffect } from "react";
 import {
   FaTachometerAlt,
@@ -7,6 +6,7 @@ import {
   FaMapMarkerAlt,
   FaUser,
   FaSignOutAlt,
+  FaKey,
 } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +88,8 @@ export default function MyAccount() {
             </p>
           </>
         );
+      case "change-password":
+        return <ChangePassword />;
       default:
         return <p>Welcome to your account.</p>;
     }
@@ -99,6 +101,7 @@ export default function MyAccount() {
     { id: "wishlist", label: "Wishlist", icon: <FaHeart /> },
     { id: "addresses", label: "Addresses", icon: <FaMapMarkerAlt /> },
     { id: "account", label: "Account Details", icon: <FaUser /> },
+    { id: "change-password", label: "Change Password", icon: <FaKey /> },
   ];
 
   return (
@@ -139,6 +142,77 @@ function InfoCard({ title, value, icon }) {
         <h5>{title}</h5>
         <p>{value}</p>
       </div>
+    </div>
+  );
+}
+
+function ChangePassword() {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleChangePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      toast.error("New passwords do not match!");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://3.223.253.106:1111/api/customer/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ oldPassword, newPassword, confirmPassword }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success(data.message || "Password changed successfully!");
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        toast.error(data.message || "Failed to change password.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Try again.");
+    }
+  };
+
+  return (
+    <div className="change-password-form">
+      <h4>Change Password</h4>
+      <input
+        type="password"
+        placeholder="Old Password"
+        value={oldPassword}
+        onChange={(e) => setOldPassword(e.target.value)}
+        className="form-control mb-3 p-2 rounded"
+      />
+      <input
+        type="password"
+        placeholder="New Password"
+        value={newPassword}
+        onChange={(e) => setNewPassword(e.target.value)}
+        className="form-control mb-3 p-2 rounded"
+      />
+      <input
+        type="password"
+        placeholder="Confirm New Password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        className="form-control mb-3 p-2 rounded"
+      />
+      <button
+        className="btn btn-orange text-white fw-bold px-4 py-2 rounded"
+        onClick={handleChangePassword}
+      >
+        Update Password
+      </button>
     </div>
   );
 }

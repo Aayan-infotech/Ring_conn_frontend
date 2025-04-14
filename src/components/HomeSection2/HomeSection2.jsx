@@ -1,72 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './HomeSection2.css';
-import prod1 from './images/gen_2.webp';
-import prod2 from './images/ringconn_gen_1.webp';
-import prod3 from './images/ringconn_gen_2_air_new.webp';
-
-const products = [
-  {
-    name: 'RINGCONN GEN 1',
-    price: '$34.00',
-    image: prod1,
-    rating: 5,
-  },
-  {
-    name: 'RINGCONN GEN 2',
-    price: '$34.00',
-    image: prod2,
-    rating: 4,
-  },
-  {
-    name: 'RINGCONN GEN 2 AIR',
-    price: '$34.00',
-    image: prod3,
-    rating: 5,
-  },
-  {
-    name: 'RINGCONN GEN 1',
-    price: '$34.00',
-    image: prod1,
-    rating: 5,
-  },
-  {
-    name: 'RINGCONN GEN 2',
-    price: '$34.00',
-    image: prod2,
-    rating: 4,
-  },
-  {
-    name: 'RINGCONN GEN 2 AIR',
-    price: '$34.00',
-    image: prod3,
-    rating: 5,
-  },
-  {
-    name: 'RINGCONN GEN 1',
-    price: '$34.00',
-    image: prod1,
-    rating: 5,
-  },
-  {
-    name: 'RINGCONN GEN 2',
-    price: '$34.00',
-    image: prod2,
-    rating: 4,
-  },
-  {
-    name: 'RINGCONN GEN 2 AIR',
-    price: '$34.00',
-    image: prod3,
-    rating: 5,
-  },
-];
 
 export default function HomeSection2() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://3.223.253.106:1111/api/Product/getAllProducts");
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleViewProduct = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div className="home-section-2 container">
       <div className="home-section-header">
@@ -95,13 +59,23 @@ export default function HomeSection2() {
           <SwiperSlide key={index}>
             <div className="product-card mb-5">
               <span className="product-tag">Trending</span>
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h3 className="product-title">{product.name}</h3>
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="product-image"
+              />
+              <h3 className="product-title">{product.title}</h3>
               <div className="product-rating">
-                {'★'.repeat(product.rating)}
-                {'☆'.repeat(5 - product.rating)}
+                {'★'.repeat(4)}
+                {'☆'.repeat(1)}
               </div>
-              <p className="product-price">{product.price}</p>
+              <p className="product-price">${product.price}</p>
+              <button
+                className="btn btn-dark mt-2"
+                onClick={() => handleViewProduct(product._id)}
+              >
+                View Product
+              </button>
             </div>
           </SwiperSlide>
         ))}

@@ -1,0 +1,26 @@
+.checkout h2 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.card-checkout h5 {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+input, select, textarea {
+  border-radius: 0.5rem !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.btn-info {
+  background-color: #00cbe6;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #00b3cc;
+}

@@ -1,0 +1,26 @@
+.payment-success-container {
+  background: linear-gradient(to right, #e0ffe0, #f4fff4);
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: #28a745;
+  animation: pop 0.6s ease-out forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.card {
+  max-width: 500px;
+  background-color: #fff;
+  border: none;
+}
