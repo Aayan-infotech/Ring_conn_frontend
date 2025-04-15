@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Navbar.css"
+import "./Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -23,12 +23,32 @@ const Navbar = () => {
     setIsLoggedIn(!!token);
   }, [location]);
 
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
 
-  const handleLogout = () => {
+    try {
+      const response = await fetch("http://3.223.253.106:1111/api/customer/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message || "Logged out successfully!");
+      } else {
+        toast.error(data.message || "Logout failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("An error occurred while logging out.");
+    }
+
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    
-    toast.success("Logged out successfully!");
 
     setTimeout(() => {
       navigate("/login");
@@ -51,103 +71,45 @@ const Navbar = () => {
             RingConn
           </Link>
 
-          <div
-            className="collapse navbar-collapse justify-content-center"
-            id="navbarNav"
-          >
+          <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul className="navbar-nav gap-3">
               <li className="nav-item">
-                <Link to="/" className="nav-link text-white">
-                  Gen 1
-                </Link>
+                <Link to="/" className="nav-link text-white">Gen 1</Link>
               </li>
               <li className="nav-item">
-                <Link to="/" className="nav-link text-white">
-                  Gen 2
-                </Link>
+                <Link to="/" className="nav-link text-white">Gen 2</Link>
               </li>
               <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle text-white"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                >
+                <Link className="nav-link dropdown-toggle text-white" to="#" role="button" data-bs-toggle="dropdown">
                   Support
                 </Link>
                 <ul className="dropdown-menu">
-                  <li>
-                    <Link to="/shipping-policy" className="dropdown-item">
-                      Shipping Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/return-policy" className="dropdown-item">
-                      Return & Refund Policy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/careplus" className="dropdown-item">
-                      Care+
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/trade-in" className="dropdown-item">
-                      Trade-in
-                    </Link>
-                  </li>
+                  <li><Link to="/shipping-policy" className="dropdown-item">Shipping Policy</Link></li>
+                  <li><Link to="/return-policy" className="dropdown-item">Return & Refund Policy</Link></li>
+                  <li><Link to="/careplus" className="dropdown-item">Care+</Link></li>
+                  <li><Link to="/trade-in" className="dropdown-item">Trade-in</Link></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle text-white"
-                  to="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                >
+                <Link className="nav-link dropdown-toggle text-white" to="#" role="button" data-bs-toggle="dropdown">
                   Explore
                 </Link>
                 <ul className="dropdown-menu">
-                  <li>
-                    <Link to="/about" className="dropdown-item">
-                      Brand Story
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/blog" className="dropdown-item">
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/news" className="dropdown-item">
-                      News
-                    </Link>
-                  </li>
+                  <li><Link to="/about" className="dropdown-item">Brand Story</Link></li>
+                  <li><Link to="/blog" className="dropdown-item">Blog</Link></li>
+                  <li><Link to="/news" className="dropdown-item">News</Link></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <Link to="/contact" className="nav-link text-white">
-                  Contact Us
-                </Link>
+                <Link to="/contact" className="nav-link text-white">Contact Us</Link>
               </li>
             </ul>
           </div>
 
           <div className="d-flex align-items-center gap-3">
-
-            <form
-              className="d-none d-lg-flex align-items-center"
-              role="search"
-            >
-              <input
-                className="form-control rounded-pill me-2"
-                type="search"
-                placeholder="Search..."
-              />
-              <button
-                className="btn btn-outline-light rounded-circle"
-                type="submit"
-              >
+            <form className="d-none d-lg-flex align-items-center" role="search">
+              <input className="form-control rounded-pill me-2" type="search" placeholder="Search..." />
+              <button className="btn btn-outline-light rounded-circle" type="submit">
                 <FiSearch />
               </button>
             </form>
@@ -168,25 +130,16 @@ const Navbar = () => {
               >
                 <FaUserCircle size={22} />
               </Link>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="userDropdown"
-              >
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                 {!isLoggedIn ? (
                   <>
                     <li>
-                      <Link
-                        to="/login"
-                        className="dropdown-item d-flex align-items-center gap-2"
-                      >
+                      <Link to="/login" className="dropdown-item d-flex align-items-center gap-2">
                         <FiLogIn /> Login
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/register"
-                        className="dropdown-item d-flex align-items-center gap-2"
-                      >
+                      <Link to="/register" className="dropdown-item d-flex align-items-center gap-2">
                         <FiUserPlus /> Register
                       </Link>
                     </li>
@@ -194,24 +147,16 @@ const Navbar = () => {
                 ) : (
                   <>
                     <li>
-                      <Link
-                        to="/myaccount"
-                        className="dropdown-item d-flex align-items-center gap-2"
-                      >
+                      <Link to="/myaccount" className="dropdown-item d-flex align-items-center gap-2">
                         <FiUser /> My Account
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/orders"
-                        className="dropdown-item d-flex align-items-center gap-2"
-                      >
+                      <Link to="/orders" className="dropdown-item d-flex align-items-center gap-2">
                         <FiPackage /> Orders
                       </Link>
                     </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
+                    <li><hr className="dropdown-divider" /></li>
                     <li>
                       <button
                         className="dropdown-item d-flex align-items-center gap-2"

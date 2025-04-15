@@ -67,7 +67,7 @@ export default function BlogDetail() {
 
         <div className="col-lg-4">
           <div className="card shadow-sm p-3 recent-blogs-card">
-            <h4 className="mb-3">Recent Blogs</h4>
+            <h4 className="mb-3">Other Recent Blogs</h4>
             {recentBlogs.map((recent) => (
               <Link
                 to={`/blog/${recent._id}`}

@@ -17,15 +17,26 @@ export default function Login() {
       const response = await fetch('http://3.223.253.106:1111/api/customer/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        localStorage.setItem('token', data.token);
+        const token = data.token;
+        localStorage.setItem('token', token);
+
+        // Decode the token to get userId
+        const base64Payload = token.split('.')[1];
+        const payload = JSON.parse(atob(base64Payload));
+        const userId = payload?.id || payload?.userId || payload?.user_id;
+
+        if (userId) {
+          localStorage.setItem('userId', userId);
+        }
+
         toast.success(data.message || 'Login successful!');
         setTimeout(() => navigate('/'), 2000);
       } else {

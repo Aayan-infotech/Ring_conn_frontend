@@ -5,7 +5,6 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { jwtDecode } from 'jwt-decode'; // ✅ Correct import
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -15,22 +14,17 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState('');
   const [userId, setUserId] = useState(null);
 
-  // ✅ Extract user ID from token
+  // Get user ID directly from localStorage
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        const id = decoded.id || decoded.userId || decoded._id;
-        setUserId(id);
-        localStorage.setItem('userId', id);
-      } catch (err) {
-        console.error('Invalid token', err);
-      }
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error('User ID not found in localStorage.');
     }
   }, []);
 
-  // ✅ Fetch product by ID
+  // Fetch product by ID
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -58,9 +52,51 @@ export default function ProductDetails() {
 
   const handleSizeSelect = (size) => setSelectedSize(size);
 
-  const handleAddToCart = () => {
-    // You can later replace this with an API call using userId and product details
-    toast.info(`Added ${quantity} item(s) of size ${selectedSize} to cart.`);
+  const handleAddToCart = async () => {
+    if (!userId) {
+      toast.error('Please login to add items to your cart.');
+      return;
+    }
+
+    // Calculate the total price based on quantity
+    const totalPrice = (product.price * quantity).toFixed(2);
+
+    // Prepare the data for the API call
+    const cartData = {
+      userId: userId,
+      products: [
+        {
+          productId: product._id,
+          productPrice: totalPrice, // Use totalPrice here
+          title: product.title,
+          color: [selectedImage],  // Assuming `selectedImage` is the color
+          quantity: quantity,
+          size: [selectedSize]  // The selected size
+        }
+      ]
+    };
+
+    try {
+      // Make the API call to add the product to the cart
+      const response = await fetch('http://3.223.253.106:1111/api/Cart/createCart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success(`Added ${quantity} item(s) of size ${selectedSize} to cart at $${totalPrice}.`);
+      } else {
+        toast.error('Failed to add product to cart.');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast.error('An error occurred while adding the product to the cart.');
+    }
   };
 
   if (!product) return <div className="text-center py-5">Loading product...</div>;
@@ -124,15 +160,6 @@ export default function ProductDetails() {
           </div>
 
           <div className="product-option mb-4">
-            <p className="option-label">MODEL:</p>
-            <div className="btn-group">
-              {product.model.map((model, i) => (
-                <button key={i} className="btn btn-outline-dark btn-sm disabled">{model}</button>
-              ))}
-            </div>
-          </div>
-
-          <div className="product-option mb-4">
             <p className="option-label">QTY:</p>
             <div className="input-group quantity-control">
               <button className="btn btn-outline-secondary" onClick={() => handleQuantityChange('decrease')}>-</button>
@@ -143,7 +170,7 @@ export default function ProductDetails() {
           </div>
 
           <h3 className="text-primary fw-bold price-display">
-            ${product.price.toFixed(2)}
+            ${(product.price * quantity).toFixed(2)} {/* Display the dynamic price */}
           </h3>
 
           <button onClick={handleAddToCart} className="btn btn-info text-white w-100 d-flex align-items-center justify-content-center gap-2 mt-4 shadow">
