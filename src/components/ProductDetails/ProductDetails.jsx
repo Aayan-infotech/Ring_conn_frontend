@@ -5,15 +5,15 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+ 
 export default function ProductDetails() {
-  const { id } = useParams();
+  const { id } = useParams();  // Get product ID from the URL params
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('');
   const [userId, setUserId] = useState(null);
-
+ 
   // Get user ID directly from localStorage
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
@@ -23,8 +23,8 @@ export default function ProductDetails() {
       console.error('User ID not found in localStorage.');
     }
   }, []);
-
-  // Fetch product by ID
+ 
+  // Fetch product by ID and store product ID in localStorage
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -34,33 +34,36 @@ export default function ProductDetails() {
           setProduct(data.product);
           setSelectedImage(data.product.images[0]);
           setSelectedSize(data.product.size[0]);
+ 
+          // Store the product ID in localStorage
+          localStorage.setItem('productId', data.product._id);  // Storing product ID
         }
       } catch (err) {
         console.error('Failed to load product:', err);
       }
     };
-
+ 
     fetchProduct();
   }, [id]);
-
+ 
   const handleImageClick = (img) => setSelectedImage(img);
-
+ 
   const handleQuantityChange = (type) => {
     if (type === 'decrease' && quantity > 1) setQuantity(quantity - 1);
     if (type === 'increase' && quantity < 10) setQuantity(quantity + 1);
   };
-
+ 
   const handleSizeSelect = (size) => setSelectedSize(size);
-
+ 
   const handleAddToCart = async () => {
     if (!userId) {
       toast.error('Please login to add items to your cart.');
       return;
     }
-
+ 
     // Calculate the total price based on quantity
     const totalPrice = (product.price * quantity).toFixed(2);
-
+ 
     // Prepare the data for the API call
     const cartData = {
       userId: userId,
@@ -75,7 +78,7 @@ export default function ProductDetails() {
         }
       ]
     };
-
+ 
     try {
       // Make the API call to add the product to the cart
       const response = await fetch('http://3.223.253.106:1111/api/Cart/createCart', {
@@ -85,9 +88,9 @@ export default function ProductDetails() {
         },
         body: JSON.stringify(cartData),
       });
-
+ 
       const data = await response.json();
-
+ 
       if (data.success) {
         toast.success(`Added ${quantity} item(s) of size ${selectedSize} to cart at $${totalPrice}.`);
       } else {
@@ -98,9 +101,9 @@ export default function ProductDetails() {
       toast.error('An error occurred while adding the product to the cart.');
     }
   };
-
+ 
   if (!product) return <div className="text-center py-5">Loading product...</div>;
-
+ 
   return (
     <div className="product-details container py-5">
       <div className="row g-5">
@@ -121,13 +124,13 @@ export default function ProductDetails() {
             ))}
           </div>
         </div>
-
+ 
         {/* Right: Product Info */}
         <div className="col-md-6">
           <h2 className="fw-bold display-6 mb-2">{product.title}</h2>
           <p className="text-muted mb-2">SKU: <span className="fw-semibold">#{product._id.slice(-5)}</span> | <span className="text-success">ACTIVE</span></p>
           <p className="text-secondary fs-6 mb-4">{product.description}</p>
-
+ 
           <div className="product-option mb-4">
             <p className="option-label">COLOR:</p>
             <div className="d-flex gap-3">
@@ -142,7 +145,7 @@ export default function ProductDetails() {
               ))}
             </div>
           </div>
-
+ 
           <div className="product-option mb-4">
             <p className="option-label">SIZE:</p>
             <div className="btn-group" role="group">
@@ -158,7 +161,7 @@ export default function ProductDetails() {
             </div>
             <span className="ms-3 text-decoration-underline text-primary size-guide">Size Guide</span>
           </div>
-
+ 
           <div className="product-option mb-4">
             <p className="option-label">QTY:</p>
             <div className="input-group quantity-control">
@@ -168,19 +171,19 @@ export default function ProductDetails() {
             </div>
             <small className="text-muted d-block">Max 10 items</small>
           </div>
-
+ 
           <h3 className="text-primary fw-bold price-display">
             ${(product.price * quantity).toFixed(2)} {/* Display the dynamic price */}
           </h3>
-
+ 
           <button onClick={handleAddToCart} className="btn btn-info text-white w-100 d-flex align-items-center justify-content-center gap-2 mt-4 shadow">
             <FaShoppingCart /> ADD TO CART
           </button>
-
+ 
           <p className="mt-4 fw-semibold text-success checkout-note">GUARANTEED SAFE CHECKOUT</p>
         </div>
       </div>
-
+ 
       {/* Toast Notification Container */}
       <ToastContainer />
     </div>

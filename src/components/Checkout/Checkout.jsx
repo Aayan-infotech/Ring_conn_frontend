@@ -44,17 +44,54 @@ export default function Checkout() {
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
 
-  const handlePlaceOrder = () => {
-    console.log("Order Placed", {
-      shipping,
-      billing,
-      delivery,
-      payment,
-      promoCode,
-      orderComment,
-    });
-    alert("Order placed successfully!");
+  const handlePlaceOrder = async () => {
+    const userId = localStorage.getItem("userId");
+    const cartId = localStorage.getItem("cartId");
+    const amount = subtotal;
+  
+    if (!userId || !cartId) {
+      alert("Missing user or cart info!");
+      return;
+    }
+  
+    const payload = {
+      amount,
+      currency: "USD",
+      userId,
+      cartId,
+    };
+  
+    try {
+      const response = await fetch(
+        "http://3.223.253.106:1111/api/Transaction/create-payment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error("Failed to create payment");
+      }
+  
+      const data = await response.json();
+      console.log("Payment Response:", data);
+  
+      // Redirect to approval URL (PayPal)
+      if (data.approvalUrl) {
+        window.location.href = data.approvalUrl;
+      } else {
+        alert("Payment failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Payment Error:", error);
+      alert("Error placing order.");
+    }
   };
+  
 
   return (
     <div className="checkout container py-5">
