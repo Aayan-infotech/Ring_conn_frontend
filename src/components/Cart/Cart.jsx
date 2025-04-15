@@ -152,53 +152,53 @@ export default function Cart() {
         <div className="cart-items-list">
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
-              <div key={item._id} className="cart-item-modern">
-                <img
-                  src={item.productId.images[0]}
-                  alt={item.productId.title}
-                />
-                <div className="details">
-                  <div className="row">
-                    <div className="col-md-4">
-                      <strong>{item.productId.title}</strong>
-                      <br />
-                      <span>{item.productId.description}</span>
-                    </div>
-                    <div className="col-md-4">
-                      <span>Quantity</span>
-                      <div className="qty-wrapper">
-                        <button
-                          onClick={() =>
-                            handleQtyChange(item.productId._id, -1)
-                          }
-                        >
-                          <Minus size={16} />
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button
-                          onClick={() =>
-                            handleQtyChange(item.productId._id, 1)
-                          }
-                        >
-                          <Plus size={16} />
-                        </button>
+              item.productId && (
+                <div key={item._id} className="cart-item-modern">
+                  <img
+                    src={item.productId.images?.[0] || "fallback-image.jpg"}
+                    alt={item.productId.title || "Product Image"}
+                  />
+                  <div className="details">
+                    <div className="row">
+                      <div className="col-md-4">
+                        <strong>{item.productId.title}</strong>
+                        <br />
+                        <span>{item.productId.description}</span>
                       </div>
-                    </div>
-                    <div className="col-md-4">
-                      <span>Price</span>
-                      <div>
-                        ${(item.productPrice * item.quantity).toFixed(2)}
+                      <div className="col-md-4">
+                        <span>Quantity</span>
+                        <div className="qty-wrapper">
+                          <button
+                            onClick={() =>
+                              handleQtyChange(item.productId._id, -1)
+                            }
+                          >
+                            <Minus size={16} />
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            onClick={() =>
+                              handleQtyChange(item.productId._id, 1)
+                            }
+                          >
+                            <Plus size={16} />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="col-md-4">
+                        <span>Price</span>
+                        <div>${(item.productPrice * item.quantity).toFixed(2)}</div>
                       </div>
                     </div>
                   </div>
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleRemoveItem(item.productId._id)}
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
-                <button
-                  className="remove-btn"
-                  onClick={() => handleRemoveItem(item.productId._id)}
-                >
-                  <Trash2 size={18} />
-                </button>
-              </div>
+              )
             ))
           ) : (
             <p>No items in the cart.</p>
