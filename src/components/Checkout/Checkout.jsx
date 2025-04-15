@@ -46,52 +46,52 @@ export default function Checkout() {
 
 
   const handlePlaceOrder = async () => {
-    const userId = localStorage.getItem("userId");
-    const cartId = localStorage.getItem("cartId");
-    const amount = localStorage.getItem("checkoutAmount"); 
-  
-    if (!userId || !cartId || !amount) {
-      alert("Missing user, cart, or amount info!");
-      return;
-    }
-  
-    const payload = {
-      amount, 
-      currency: "USD",
-      userId,
-      cartId,
-    };
-  
-    try {
-      const response = await fetch(
-        "http://3.223.253.106:1111/api/Transaction/create-payment",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-  
-      if (!response.ok) {
-        throw new Error("Failed to create payment");
-      }
-  
-      const data = await response.json();
-      console.log("Payment Response:", data);
-  
-      // Redirect to approval URL (PayPal)
-      if (data.approvalUrl) {
-        window.location.href = data.approvalUrl;
-      } else {
-        alert("Payment failed. Please try again.");
-      }
-    } catch (error) {
-      console.error("Payment Error:", error);
-      alert("Error placing order.");
-    }
+  const userId = localStorage.getItem("userId");
+  const cartId = localStorage.getItem("cartId");
+  const amount = Number(localStorage.getItem("checkoutAmount")); // Convert to number
+
+  if (!userId || !cartId || isNaN(amount)) {
+    alert("Missing or invalid user, cart, or amount info!");
+    return;
+  }
+
+  const payload = {
+    amount,
+    currency: "USD",
+    userId,
+    cartId,
   };
+
+  try {
+    const response = await fetch(
+      "http://3.223.253.106:1111/api/Transaction/create-payment",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to create payment");
+    }
+
+    const data = await response.json();
+    console.log("Payment Response:", data);
+
+    if (data.approvalUrl) {
+      window.location.href = data.approvalUrl;
+    } else {
+      alert("Payment failed. Please try again.");
+    }
+  } catch (error) {
+    console.error("Payment Error:", error);
+    alert("Error placing order.");
+  }
+};
+
   
   
 
