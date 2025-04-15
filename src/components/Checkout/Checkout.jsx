@@ -42,20 +42,21 @@ export default function Checkout() {
     { name: "Knitted Sweater", price: 199 },
   ];
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const subtotal = parseFloat(localStorage.getItem("checkoutAmount")) || 0;
+
 
   const handlePlaceOrder = async () => {
     const userId = localStorage.getItem("userId");
     const cartId = localStorage.getItem("cartId");
-    const amount = subtotal;
+    const amount = localStorage.getItem("checkoutAmount"); 
   
-    if (!userId || !cartId) {
-      alert("Missing user or cart info!");
+    if (!userId || !cartId || !amount) {
+      alert("Missing user, cart, or amount info!");
       return;
     }
   
     const payload = {
-      amount,
+      amount, 
       currency: "USD",
       userId,
       cartId,
@@ -91,6 +92,7 @@ export default function Checkout() {
       alert("Error placing order.");
     }
   };
+  
   
 
   return (
@@ -357,7 +359,7 @@ export default function Checkout() {
               Order Summary
             </h5>
             <ul className="list-group mb-3">
-              {cartItems.map((item, i) => (
+              {/* {cartItems.map((item, i) => (
                 <li
                   className="list-group-item d-flex justify-content-between"
                   key={i}
@@ -365,23 +367,14 @@ export default function Checkout() {
                   <span>{item.name}</span>
                   <span>${item.price.toFixed(2)}</span>
                 </li>
-              ))}
+              ))} */}
               <li className="list-group-item d-flex justify-content-between fw-bold">
                 <span>Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
               </li>
             </ul>
             <label className="form-label">Promo Code:</label>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter code"
-                value={promoCode}
-                onChange={(e) => setPromoCode(e.target.value)}
-              />
-              <button className="btn btn-outline-secondary">Apply</button>
-            </div>
+            
             <button
               className="btn btn-primary w-100 fw-bold"
               onClick={handlePlaceOrder}
