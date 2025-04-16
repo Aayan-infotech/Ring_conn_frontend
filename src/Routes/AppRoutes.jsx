@@ -8,6 +8,7 @@ import Home from "../components/Home/Home";
 import HomeSection1 from "../components/HomeSection1/HomeSection1";
 import HomeSection2 from "../components/HomeSection2/HomeSection2";
 import HomeSection3 from "../components/HomeSection3/HomeSection3";
+import HomeSection4 from "../components/HomeSection4/HomeSection4";
 import About from "../components/About/About";
 import Blog from "../components/Blog/Blog";
 import BlogDetails from "../components/BlogDetails/BlogDetails";
@@ -22,6 +23,8 @@ import MyAccount from "../components/MyAccount/MyAccount";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 import Orders from "../components/Orders/Orders";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import PaymentCancel from "../components/PaymentCancel/PaymentCancel";
+
 
 function AppRoutes() {
   const location = useLocation();
@@ -36,6 +39,7 @@ function AppRoutes() {
       "/home1": "Home Section 1 | RingConn",
       "/home2": "Home Section 2 | RingConn",
       "/home3": "Home Section 3 | RingConn",
+      "/home4": "Home Section 4 | RingConn",
       "/about": "About Us | RingConn",
       "/blog": "Blog | RingConn",
       "/news": "News | RingConn",
@@ -68,6 +72,7 @@ function AppRoutes() {
         <Route path="/home1" element={<HomeSection1 />} />
         <Route path="/home2" element={<HomeSection2 />} />
         <Route path="/home3" element={<HomeSection3 />} />
+        <Route path="/home3" element={<HomeSection4 />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetails />} />
@@ -77,6 +82,8 @@ function AppRoutes() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/payment-successful" element={<PaymentSuccessfull />} />
+        <Route path="/payment-fail" element={<PaymentCancel />} />
+
         {/* ProtectedRoute */}
         <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
         <Route path="/myaccount" element={<ProtectedRoute><MyAccount /></ProtectedRoute>} />

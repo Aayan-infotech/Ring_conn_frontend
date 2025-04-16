@@ -42,6 +42,11 @@ export default function BlogDetail() {
     }
   };
 
+  // Helper function to strip HTML tags
+  const stripHtmlTags = (html) => {
+    return html?.replace(/<[^>]+>/g, '');
+  };
+
   if (loading) return <div className="container my-5 text-center">Loading blog...</div>;
 
   if (!blog) return <div className="container my-5 text-center">Blog not found.</div>;
@@ -53,7 +58,7 @@ export default function BlogDetail() {
           <img src={blog.thumbnailImage} className="img-fluid rounded mb-4 blog-cover" alt="Cover" />
           <p className="blog-date">{new Date(blog.createdAt).toLocaleDateString()}</p>
           <h1 className="blog-title">{blog.title}</h1>
-          <p className="blog-content">{blog.description}</p>
+          <p className="blog-content">{stripHtmlTags(blog.description)}</p>
           {blog.contentImages?.map((img, index) => (
             <img
               key={index}
@@ -94,4 +99,3 @@ export default function BlogDetail() {
     </div>
   );
 }
-

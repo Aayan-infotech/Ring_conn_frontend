@@ -28,6 +28,11 @@ export default function Blog() {
     }
   };
 
+  // Helper function to remove HTML tags from string
+  const stripHtmlTags = (html) => {
+    return html?.replace(/<[^>]+>/g, '');
+  };
+
   return (
     <div className="container my-4">
       <h1 className="text-center mb-4 blog-heading">Our Latest Blogs</h1>
@@ -53,7 +58,7 @@ export default function Blog() {
                   </p>
                   <h5 className="card-title blog-card-title">{blog.title}</h5>
                   <p className="card-text blog-card-text">
-                    {blog.description?.substring(0, 80)}...
+                    {stripHtmlTags(blog.description)?.substring(0, 80)}...
                   </p>
                   <Link
                     to={`/blog/${blog._id}`}

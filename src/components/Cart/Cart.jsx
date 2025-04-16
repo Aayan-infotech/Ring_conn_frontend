@@ -11,7 +11,6 @@ export default function Cart() {
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId");
-  const productId = localStorage.getItem("productId");
 
   useEffect(() => {
     if (userId) {
@@ -19,10 +18,10 @@ export default function Cart() {
         .then((response) => response.json())
         .then((data) => {
           if (data.success && data.data.length > 0) {
-            const cart = data.data[0]; // Assuming one cart per user
+            const cart = data.data[0];
             const allCartItems = cart.products;
             setCartItems(allCartItems);
-            localStorage.setItem("cartId", cart._id); // Save cartId
+            localStorage.setItem("cartId", cart._id);
           } else {
             setCartItems([]);
             toast.info("Your cart is empty");
@@ -42,16 +41,14 @@ export default function Cart() {
     updateSubtotal();
   }, [cartItems]);
 
-  const handleQtyChange = (productId, delta) => {
+  const handleQtyChange = (itemId, delta) => {
     setCartItems((prevItems) => {
       const updatedItems = prevItems.map((item) =>
-        item.productId._id === productId
+        item._id === itemId
           ? { ...item, quantity: Math.max(1, item.quantity + delta) }
           : item
       );
-      const updatedProduct = updatedItems.find(
-        (item) => item.productId._id === productId
-      );
+      const updatedProduct = updatedItems.find((item) => item._id === itemId);
       if (updatedProduct) {
         updateCartOnServer(updatedProduct);
         toast.success("Quantity updated");
@@ -60,18 +57,15 @@ export default function Cart() {
     });
   };
 
-  const handleRemoveItem = (productId) => {
-    fetch(
-      `http://3.223.253.106:1111/api/Cart/deleteCart/${userId}/${productId}`,
-      {
-        method: "DELETE",
-      }
-    )
+  const handleRemoveItem = (itemId) => {
+    fetch(`http://3.223.253.106:1111/api/Cart/deleteCart/${userId}/${itemId}`, {
+      method: "DELETE",
+    })
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           setCartItems((prevItems) =>
-            prevItems.filter((item) => item.productId._id !== productId)
+            prevItems.filter((item) => item._id !== itemId)
           );
           toast.success("Product removed from cart");
         } else {
@@ -85,24 +79,19 @@ export default function Cart() {
       });
   };
 
-  const updateCartOnServer = (
-    updatedProduct = null,
-    productIdToRemove = null
-  ) => {
-    const updatedProducts = cartItems
-      .filter((item) => item.productId._id !== productIdToRemove)
-      .map((item) =>
-        item.productId._id === updatedProduct?.productId._id
-          ? { ...item, quantity: updatedProduct?.quantity }
-          : item
-      );
+  const updateCartOnServer = (updatedProduct) => {
+    const updatedProducts = cartItems.map((item) =>
+      item._id === updatedProduct._id
+        ? { ...item, quantity: updatedProduct.quantity }
+        : item
+    );
 
     const updatedCart = {
       products: updatedProducts,
     };
 
     fetch(
-      `http://3.223.253.106:1111/api/Cart/updateCart/${userId}/${productId}`,
+      `http://3.223.253.106:1111/api/Cart/updateCart/${userId}/${updatedProduct._id}`,
       {
         method: "PUT",
         headers: {
@@ -115,6 +104,7 @@ export default function Cart() {
       .then((data) => {
         if (data.success) {
           toast.success("Cart updated successfully");
+          setCartItems(updatedProducts);
         } else {
           toast.error("Failed to update cart");
         }
@@ -151,8 +141,8 @@ export default function Cart() {
       <div className="cart-flex">
         <div className="cart-items-list">
           {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              item.productId && (
+            cartItems.map((item) =>
+              item.productId ? (
                 <div key={item._id} className="cart-item-modern">
                   <img
                     src={item.productId.images?.[0] || "fallback-image.jpg"}
@@ -168,38 +158,32 @@ export default function Cart() {
                       <div className="col-md-4">
                         <span>Quantity</span>
                         <div className="qty-wrapper">
-                          <button
-                            onClick={() =>
-                              handleQtyChange(item.productId._id, -1)
-                            }
-                          >
+                          <button onClick={() => handleQtyChange(item._id, -1)}>
                             <Minus size={16} />
                           </button>
                           <span>{item.quantity}</span>
-                          <button
-                            onClick={() =>
-                              handleQtyChange(item.productId._id, 1)
-                            }
-                          >
+                          <button onClick={() => handleQtyChange(item._id, 1)}>
                             <Plus size={16} />
                           </button>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <span>Price</span>
-                        <div>${(item.productPrice * item.quantity).toFixed(2)}</div>
+                        <div>
+                          ${(item.productPrice * item.quantity).toFixed(2)}
+                        </div>
                       </div>
                     </div>
                   </div>
                   <button
                     className="remove-btn"
-                    onClick={() => handleRemoveItem(item.productId._id)}
+                    onClick={() => handleRemoveItem(item._id)}
                   >
                     <Trash2 size={18} />
                   </button>
                 </div>
-              )
-            ))
+              ) : null
+            )
           ) : (
             <p>No items in the cart.</p>
           )}

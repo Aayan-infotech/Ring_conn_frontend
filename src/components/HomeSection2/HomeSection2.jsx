@@ -71,7 +71,7 @@ export default function HomeSection2() {
               </div>
               <p className="product-price">${product.price}</p>
               <button
-                className="btn btn-dark mt-2"
+                className="btn product-btn-custom mt-2"
                 onClick={() => handleViewProduct(product._id)}
               >
                 View Product
