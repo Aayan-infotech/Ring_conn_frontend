@@ -87,13 +87,13 @@ export default function Login() {
         >
           Login
         </button>
-        <p className="text-muted">Or Sign in with social platforms</p>
+        {/* <p className="text-muted">Or Sign in with social platforms</p>
         <div className="d-flex gap-3 mt-2">
           <span className="social-icon bg-white text-orange"><FaFacebookF /></span>
           <span className="social-icon bg-white text-orange"><FaGoogle /></span>
           <span className="social-icon bg-white text-orange"><FaTwitter /></span>
           <span className="social-icon bg-white text-orange"><FaLinkedinIn /></span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -60,3 +60,20 @@
   height: auto;
   display: block;
 }
+.delivery-section {
+  /* background-image: url(./images/background.jpg); */
+  background: #000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px 0;
+}
+
+.delivery-item h6 {
+  font-size: 14px;
+}
+
+.delivery-item small {
+  font-size: 11px;
+  color: #ffffff;
+}

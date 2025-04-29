@@ -41,20 +41,36 @@ export default function Cart() {
     updateSubtotal();
   }, [cartItems]);
 
-  const handleQtyChange = (itemId, delta) => {
-    setCartItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
-        item._id === itemId
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      );
-      const updatedProduct = updatedItems.find((item) => item._id === itemId);
-      if (updatedProduct) {
-        updateCartOnServer(updatedProduct);
-        toast.success("Quantity updated");
-      }
-      return updatedItems;
-    });
+  const handleUpdate = (itemId, newQuantity, newSize) => {
+    fetch(`http://3.223.253.106:1111/api/Cart/updateCart/${userId}/${itemId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quantity: newQuantity.toString(),
+        size: [newSize.toString()],
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success("Cart item updated");
+          setCartItems((prevItems) =>
+            prevItems.map((item) =>
+              item._id === itemId
+                ? { ...item, quantity: newQuantity, size: [newSize] }
+                : item
+            )
+          );
+        } else {
+          toast.error("Failed to update item");
+        }
+      })
+      .catch((err) => {
+        console.error("Update error:", err);
+        toast.error("Error updating cart");
+      });
   };
 
   const handleRemoveItem = (itemId) => {
@@ -79,42 +95,6 @@ export default function Cart() {
       });
   };
 
-  const updateCartOnServer = (updatedProduct) => {
-    const updatedProducts = cartItems.map((item) =>
-      item._id === updatedProduct._id
-        ? { ...item, quantity: updatedProduct.quantity }
-        : item
-    );
-
-    const updatedCart = {
-      products: updatedProducts,
-    };
-
-    fetch(
-      `http://3.223.253.106:1111/api/Cart/updateCart/${userId}/${updatedProduct._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedCart),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          toast.success("Cart updated successfully");
-          setCartItems(updatedProducts);
-        } else {
-          toast.error("Failed to update cart");
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating cart:", error);
-        toast.error("Error updating cart");
-      });
-  };
-
   const updateSubtotal = () => {
     const newSubtotal = cartItems.reduce(
       (sum, item) => sum + item.productPrice * item.quantity,
@@ -133,7 +113,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="cart-container-modern">
+    <div className="cart-container-modern container">
       <ToastContainer position="top-right" autoClose={2000} />
       <h1>
         <ShoppingCart size={32} /> Your Shopping Cart
@@ -149,27 +129,65 @@ export default function Cart() {
                     alt={item.productId.title || "Product Image"}
                   />
                   <div className="details">
-                    <div className="row">
-                      <div className="col-md-4">
+                    <div className="row text-center">
+                      <div className="col-md-3">
                         <strong>{item.productId.title}</strong>
                         <br />
-                        <span>{item.productId.description}</span>
+                        {/* <span>{item.productId.description}</span> */}
                       </div>
-                      <div className="col-md-4">
+                      <div className="col-md-3">
                         <span>Quantity</span>
                         <div className="qty-wrapper">
-                          <button onClick={() => handleQtyChange(item._id, -1)}>
+                          <button
+                            onClick={() =>
+                              item.quantity > 1 &&
+                              handleUpdate(
+                                item._id,
+                                item.quantity - 1,
+                                item.size?.[0] || 1
+                              )
+                            }
+                          >
                             <Minus size={16} />
                           </button>
                           <span>{item.quantity}</span>
-                          <button onClick={() => handleQtyChange(item._id, 1)}>
+                          <button
+                            onClick={() =>
+                              handleUpdate(
+                                item._id,
+                                item.quantity + 1,
+                                item.size?.[0] || 1
+                              )
+                            }
+                          >
                             <Plus size={16} />
                           </button>
                         </div>
                       </div>
-                      <div className="col-md-4">
-                        <span>Price</span>
-                        <div>
+                      <div className="col-md-3">
+                        <span>Your Size</span>
+                        <div className="size-wrapper">
+                          <select className="p-1"
+                            value={item.size?.[0] || "1"}
+                            onChange={(e) =>
+                              handleUpdate(
+                                item._id,
+                                item.quantity,
+                                e.target.value
+                              )
+                            }
+                          >
+                            {[6, 7, 8, 9, 10, 11, 12].map((size) => (
+                              <option key={size} value={size}>
+                                {size}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-md-3">
+                        <span>Item Price</span>
+                        <div className="price-wrapper">
                           ${(item.productPrice * item.quantity).toFixed(2)}
                         </div>
                       </div>
@@ -189,7 +207,7 @@ export default function Cart() {
           )}
         </div>
         <div className="cart-summary-modern">
-          <h2>Summary</h2>
+          <h2>Your Order Summary</h2>
           <p>
             <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
           </p>

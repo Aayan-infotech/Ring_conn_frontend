@@ -1,21 +1,21 @@
 /* Global Styles */
 .cart-container-modern {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom right, #fefefe, #f4f6f8);
   color: #333;
   border-radius: 16px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
 }
 
 .cart-container-modern h1 {
-  font-size: 2.2rem;
-  display: flex;
+  font-size: 2rem;
+  /* display: flex; */
   align-items: center;
   gap: 10px;
   margin-bottom: 2rem;
+  text-align: center;
   color: #1e1e2f;
 }
 
@@ -87,7 +87,14 @@
 .qty-wrapper button:hover {
   background-color: #bbdefb;
 }
-
+.size-wrapper{
+  margin-top: 0.5rem;
+}
+.price-wrapper{
+  margin-top: 0.5rem;
+  font-size: 18px;
+  font-weight: bold;
+}
 /* Remove Button */
 .remove-btn {
   background: none;
@@ -110,15 +117,15 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .cart-summary-modern h2 {
   margin: 0;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   border-bottom: 2px solid #eee;
   padding-bottom: 0.7rem;
-  color: #1a237e;
+  color: #000000;
 }
 
 /* Promo Code Section */
@@ -177,8 +184,8 @@
 
 /* Checkout Button */
 .checkout-btn-modern {
-  padding: 0.9rem;
-  background-color: #43a047;
+  padding: 10px;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 8px;

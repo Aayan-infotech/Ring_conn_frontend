@@ -7,6 +7,8 @@ import {
   FaPaperPlane,
 } from "react-icons/fa";
 import { IoChatbubblesOutline } from "react-icons/io5";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,7 +18,6 @@ export default function Contact() {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +26,6 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setResponseMessage("");
 
     const payload = {
       ...formData,
@@ -33,22 +33,25 @@ export default function Contact() {
     };
 
     try {
-      const res = await fetch("http://3.223.253.106:1111/api/appointment/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        "http://3.223.253.106:1111/api/appointment/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (res.ok) {
-        setResponseMessage("Message sent successfully!");
+        toast.success("Message sent successfully!");
         setFormData({ fullName: "", email: "", mobile: "", message: "" });
       } else {
-        setResponseMessage("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.");
       }
     } catch (error) {
-      setResponseMessage("Failed to send message. Please try later.");
+      toast.error("Failed to send message. Please try later.");
     } finally {
       setLoading(false);
     }
@@ -56,13 +59,15 @@ export default function Contact() {
 
   return (
     <div className="flightmantra-contact-wrapper">
+      <ToastContainer />
       <div className="container">
         <div className="row flightmantra-contact-container">
           {/* Contact Form */}
           <div className="col-lg-6 flightmantra-contact-form-section">
             <h2 className="flightmantra-contact-title">Get In Touch</h2>
             <p className="flightmantra-contact-description">
-              We respond to emails within 48 hours. Check your spam folder or call if no reply.
+              We respond to emails within 48 hours. Check your spam folder or
+              call if no reply.
             </p>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -117,11 +122,6 @@ export default function Contact() {
                 <FaPaperPlane className="me-2" />
                 {loading ? "Sending..." : "Send Message"}
               </button>
-              {responseMessage && (
-                <div className="mt-3 text-center">
-                  <small>{responseMessage}</small>
-                </div>
-              )}
             </form>
           </div>
 
@@ -144,25 +144,31 @@ export default function Contact() {
               <li className="flightmantra-contact-item">
                 <FaMapMarkerAlt className="flightmantra-contact-icon" />
                 <span className="flightmantra-contact-text">
-                  <strong>HK Office:</strong> RINGCONN (HONG KONG) LIMITED, RM A07, 1701-02 NEW TREND CTR, 704 PRINCE EDWARD RD EAST, SAN PO KONG, HONG KONG
+                  <strong>HK Office:</strong> RINGCONN (HONG KONG) LIMITED, RM
+                  A07, 1701-02 NEW TREND CTR, 704 PRINCE EDWARD RD EAST, SAN PO
+                  KONG, HONG KONG
                 </span>
               </li>
               <li className="flightmantra-contact-item">
                 <FaMapMarkerAlt className="flightmantra-contact-icon" />
                 <span className="flightmantra-contact-text">
-                  <strong>US Office:</strong> RingConn LLC, 1226 NORTH KING ST NUM 292, WILMINGTON, DE 19801, UNITED STATES
+                  <strong>US Office:</strong> RingConn LLC, 1226 NORTH KING ST
+                  NUM 292, WILMINGTON, DE 19801, UNITED STATES
                 </span>
               </li>
               <li className="flightmantra-contact-item">
                 <IoChatbubblesOutline className="flightmantra-contact-icon" />
                 <span className="flightmantra-contact-text">
-                  We respond to emails within 48 hours. Check your spam folder or call if no reply.
+                  We respond to emails within 48 hours. Check your spam folder
+                  or call if no reply.
                 </span>
               </li>
             </ul>
           </div>
         </div>
       </div>
+
+      
     </div>
   );
 }

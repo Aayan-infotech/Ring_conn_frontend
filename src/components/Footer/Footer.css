@@ -1,6 +1,7 @@
 .footer {
     /* background-color: #0f0f0f; */
-    background-image: url(https://img.freepik.com/free-vector/red-black-patterned-background-vector_53876-63163.jpg?uid=R187744377&ga=GA1.1.2076956031.1739515128&semt=ais_hybrid&w=740);
+    /* background-image: url(https://img.freepik.com/free-vector/red-black-patterned-background-vector_53876-63163.jpg?uid=R187744377&ga=GA1.1.2076956031.1739515128&semt=ais_hybrid&w=740); */
+    background-image: url("./images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center ;

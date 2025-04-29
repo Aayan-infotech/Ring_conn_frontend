@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-// import './PaymentCancel.css';
+import './PaymentCancel.css';
 
 const PaymentCancel = () => {
   useEffect(() => {
-    const stackContainer = document.querySelector(".stack-container");
-    const cardNodes = document.querySelectorAll(".card-containerF");
-    const perspecNodes = document.querySelectorAll(".perspec");
-    const perspec = document.querySelector(".perspec");
-    const card = document.querySelector(".card");
+    const stackContainer = document.querySelector(".pc-stack-container");
+    const cardNodes = document.querySelectorAll(".pc-card-container");
+    const perspecNodes = document.querySelectorAll(".pc-perspec");
+    const perspec = document.querySelector(".pc-perspec");
+    const card = document.querySelector(".pc-card");
 
     let counter = stackContainer.children.length;
 
@@ -17,14 +17,15 @@ const PaymentCancel = () => {
 
     card.addEventListener("animationend", function () {
       perspecNodes.forEach(function (elem) {
-        elem.classList.add("explode");
+        elem.classList.add("pc-explode");
       });
     });
 
     perspec.addEventListener("animationend", function (e) {
-      if (e.animationName === "explode") {
+      if (e.animationName === "pc-explode") {
         cardNodes.forEach(function (elem) {
-          elem.classList.add("pokeup");
+          elem.classList.add("pc-pokeup");
+
           elem.addEventListener("click", function () {
             let updown = [800, -800];
             let randomY = updown[Math.floor(Math.random() * updown.length)];
@@ -44,19 +45,19 @@ const PaymentCancel = () => {
           for (let index = 0; index < numLines; index++) {
             let lineLength = randomIntFromInterval(25, 97);
             var node = document.createElement("li");
-            node.classList.add("node-" + index);
-            elem.querySelector(".code ul").appendChild(node);
+            node.classList.add("pc-node-" + index);
+            elem.querySelector(".pc-code ul").appendChild(node);
             node.setAttribute("style", "--linelength: " + lineLength + "%;");
 
             if (index === 0) {
-              node.classList.add("writeLine");
+              node.classList.add("pc-writeLine");
             } else {
               elem
-                .querySelector(".code ul .node-" + (index - 1))
+                .querySelector(".pc-code ul .pc-node-" + (index - 1))
                 .addEventListener("animationend", function () {
                   elem
-                    .querySelector(".code ul .node-" + index)
-                    .classList.add("writeLine");
+                    .querySelector(".pc-code ul .pc-node-" + index)
+                    .classList.add("pc-writeLine");
                 });
             }
           }
@@ -75,33 +76,31 @@ const PaymentCancel = () => {
   ];
 
   return (
-    <div className="containerF">
-      <div className="error" style={{ textAlign: "center", padding: "20px" }}>
-        <h1 style={{ fontSize: "60px", marginBottom: "35px", color: "#e74c3c" }}>Oops</h1>
-        <h2 style={{ fontSize: "28px", marginBottom: "15px" }}>Payment Failed</h2>
-        <p style={{ fontSize: "18px", maxWidth: "500px", margin: "0 auto", color: "#555" }}>
-          Your payment was not completed. It was a mistake , please try again.
-        </p>
+    <div className="pc-container">
+      <div className="pc-error">
+        <h1>Oops</h1>
+        <h2>Payment Failed</h2>
+        <p>Your payment was not completed. It was a mistake, please try again.</p>
       </div>
-      <div className="stack-container">
+      <div className="pc-stack-container">
         {cards.map((card, idx) => (
-          <div className="card-containerF" key={idx}>
+          <div className="pc-card-container" key={idx}>
             <div
-              className="perspec"
+              className="pc-perspec"
               style={{
                 "--spreaddist": `${card.spread}px`,
                 "--scaledist": card.scale,
                 "--vertdist": `${card.vert}px`,
               }}
             >
-              <div className="card">
-                <div className="writing">
-                  <div className="topbar">
-                    <div className="red"></div>
-                    <div className="yellow"></div>
-                    <div className="green"></div>
+              <div className="pc-card">
+                <div className="pc-writing">
+                  <div className="pc-topbar">
+                    <div className="pc-red"></div>
+                    <div className="pc-yellow"></div>
+                    <div className="pc-green"></div>
                   </div>
-                  <div className="code">
+                  <div className="pc-code">
                     <ul></ul>
                   </div>
                 </div>

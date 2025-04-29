@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
-import {
-  FiSearch,
-  FiLogIn,
-  FiUserPlus,
-  FiUser,
-  FiPackage,
-  FiLogOut,
-} from "react-icons/fi";
+import { FiSearch, FiLogIn, FiUserPlus, FiUser, FiPackage, FiLogOut } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Navbar.css";
@@ -17,6 +10,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -25,7 +19,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
-
+  
     try {
       const response = await fetch("http://3.223.253.106:1111/api/customer/logout", {
         method: "POST",
@@ -34,9 +28,9 @@ const Navbar = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         toast.success(data.message || "Logged out successfully!");
       } else {
@@ -46,13 +40,18 @@ const Navbar = () => {
       console.error("Logout error:", error);
       toast.error("An error occurred while logging out.");
     }
-
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-
+    localStorage.clear();      
+    sessionStorage.clear(); 
+    setIsLoggedIn(false);     
+  
     setTimeout(() => {
       navigate("/login");
     }, 2500);
+  };
+  
+
+  const handleCardClick = (productId) => {
+    navigate(`/product/${productId}`);
   };
 
   useEffect(() => {
@@ -74,10 +73,22 @@ const Navbar = () => {
           <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul className="navbar-nav gap-3">
               <li className="nav-item">
-                <Link to="/" className="nav-link text-white">Gen 1</Link>
+                <div
+                  className="nav-link text-white"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleCardClick("680f63c7c396eb51ef10d83f")}
+                >
+                  Finger Ring
+                </div>
               </li>
               <li className="nav-item">
-                <Link to="/" className="nav-link text-white">Gen 2</Link>
+                <div
+                  className="nav-link text-white"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleCardClick("680f62b8c396eb51ef10d836")}
+                >
+                  Couple Ring
+                </div>
               </li>
               <li className="nav-item dropdown">
                 <Link className="nav-link dropdown-toggle text-white" to="#" role="button" data-bs-toggle="dropdown">
@@ -117,7 +128,7 @@ const Navbar = () => {
             <Link to="/cart" className="text-white position-relative">
               <FaShoppingCart size={20} />
               <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                3
+                  
               </span>
             </Link>
 

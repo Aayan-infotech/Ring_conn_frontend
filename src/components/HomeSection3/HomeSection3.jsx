@@ -9,7 +9,7 @@ export default function HomeSection3() {
         <div className="row align-items-center">
           {/* Left Column */}
           <div className="col-md-6 text-center">
-            <h1 className="fw-bold">RingConn Gen 2</h1>
+            <h1 className="fw-bold">Smart Couple Ring</h1>
             <p className="subheading">The World's First Ultra-Thin Smart Ring
             </p>
             <h2 className="discount-text">With Sleep Apnea Monitoring</h2>

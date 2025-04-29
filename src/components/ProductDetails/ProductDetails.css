@@ -14,9 +14,14 @@
 .product-image:hover {
   transform: scale(1.02);
 }
+.color-option.selected {
+  border: 2px solid #0d6efd; /* Bootstrap Primary color */
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
+}
 
 .thumbnail-images img.thumb {
   width: 22%;
+  height: 80px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
