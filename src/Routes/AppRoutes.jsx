@@ -39,7 +39,7 @@ function AppRoutes() {
 
   useEffect(() => {
     const pathToTitle = {
-      "/": "Home",
+      "/": "RingConn",
       "/login": "Login | RingConn",
       "/register": "Register | RingConn",
       "/forgot-password": "Forgot Password | RingConn",
