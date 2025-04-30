@@ -32,7 +32,12 @@ import TradeInPage1 from "../components/TradeIn/TradeInPage1";
 import TradeInPage2 from "../components/TradeIn/TradeInPage2";
 import TradeInPage3 from "../components/TradeIn/TradeInPage3";
 import TradeInPage4 from "../components/TradeIn/TradeInPage4";
-
+import Care from "../components/Care/Care";
+import Care1 from "../components/Care/Care1";
+import Care2 from "../components/Care/Care2";
+import Care3 from "../components/Care/Care3";
+import Care4 from "../components/Care/Care4";
+import Care5 from "../components/Care/Care5";
 
 function AppRoutes() {
   const location = useLocation();
@@ -97,14 +102,41 @@ function AppRoutes() {
         <Route path="/trade-in-2" element={<TradeInPage2 />} />
         <Route path="/trade-in-3" element={<TradeInPage3 />} />
         <Route path="/trade-in-4" element={<TradeInPage4 />} />
+        <Route path="/careplus" element={<Care />} />
+        <Route path="/careplus1" element={<Care1 />} />
+        <Route path="/careplus2" element={<Care2 />} />
+        <Route path="/careplus3" element={<Care3 />} />
+        <Route path="/careplus4" element={<Care4 />} />
+        <Route path="/careplus5" element={<Care5 />} />
 
         <Route path="/payment-successful" element={<PaymentSuccessfull />} />
         <Route path="/payment-fail" element={<PaymentCancel />} />
 
         {/* ProtectedRoute */}
-        <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-        <Route path="/myaccount" element={<ProtectedRoute><MyAccount /></ProtectedRoute>} />
-        <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/myaccount"
+          element={
+            <ProtectedRoute>
+              <MyAccount />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import './ReturnPolicy.css'; // We'll create this CSS file next
+import './ReturnPolicy.css'; 
 
 const ReturnPolicy = () => {
   return (

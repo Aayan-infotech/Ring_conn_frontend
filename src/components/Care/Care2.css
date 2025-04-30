@@ -1,0 +1,93 @@
+/* CareServiceScope.css */
+.care-service-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+  
+  .care-service-main-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #2a2a2a;
+    position: relative;
+    padding-bottom: 0.5rem;
+    text-align: left;
+  }
+  
+  .care-service-main-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background-color: #4a6bff;
+  }
+  
+  .care-service-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-start;
+  }
+  
+  .care-service-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .care-service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .care-service-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #3a3a3a;
+  }
+  
+  .care-service-card-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .care-service-container {
+      padding: 1.5rem;
+    }
+    
+    .care-service-main-title {
+      font-size: 1.8rem;
+    }
+    
+    .care-service-cards-container {
+      flex-direction: column;
+    }
+    
+    .care-service-card {
+      max-width: 100%;
+    }
+    
+    .care-service-card-title {
+      font-size: 1.3rem;
+    }
+    
+    .care-service-card-desc {
+      font-size: 1rem;
+    }
+  }
