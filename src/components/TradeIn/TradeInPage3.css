@@ -1,0 +1,64 @@
+.tradein-container {
+    /* max-width: 1400px; */
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .tradein-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #000;
+  }
+  
+  .steps-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .step-card {
+    min-width: 200px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 1;
+  }
+  
+  .step-number {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .step-description {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .tradein-note {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-left: 4px solid #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .tradein-note p {
+    margin: 0;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 768px) {
+    .steps-row {
+      flex-direction: column;
+    }
+    .step-card {
+      min-width: auto;
+    }
+  }

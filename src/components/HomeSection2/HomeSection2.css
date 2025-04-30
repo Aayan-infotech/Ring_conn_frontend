@@ -2,19 +2,19 @@
   padding: 40px 20px;
   background: #fff;
 }
-
+ 
 .home-section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
-
+ 
 .home-section-header h2 {
   font-size: 24px;
   font-weight: 700;
 }
-
+ 
 .category-tabs span {
   margin-left: 15px;
   font-size: 14px;
@@ -23,14 +23,14 @@
   opacity: 0.6;
   transition: 0.3s;
 }
-
+ 
 .category-tabs .active {
   color: #00b894;
   opacity: 1;
   font-weight: bold;
   border-bottom: 2px solid #00b894;
 }
-
+ 
 .product-card {
   background: #f8f8f8;
   padding: 20px;
@@ -39,12 +39,12 @@
   text-align: center;
   transition: all 0.3s ease;
 }
-
+ 
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .product-tag {
   background-color: goldenrod;
   color: #fff;
@@ -56,25 +56,25 @@
   margin-top: -10px;
   margin-left: -10px;
 }
-
+ 
 .product-image {
   height: 120px;
   object-fit: contain;
   margin: 15px 0;
 }
-
+ 
 .product-title {
   font-size: 16px;
   font-weight: 500;
   color: #333;
 }
-
+ 
 .product-rating {
   color: #f1c40f;
   font-size: 14px;
   margin: 5px 0;
 }
-
+ 
 .product-price {
   color: #111;
   font-size: 16px;
@@ -90,9 +90,29 @@
   border: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+ 
 .product-btn-custom:hover {
   background-color: #b8860b; /* Dark gold */
   color: #fff;
 }
-
+ 
+/* Adjust Swiper container to relative position */
+.swiper {
+  position: relative;
+  padding: 10px 0;
+}
+ 
+/* Position navigation arrows properly */
+.swiper-button-next,
+.swiper-button-prev {
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000; /* optional: make arrows visible on light backgrounds */
+  z-index: 10;
+}
+ 
+/* Optional: Make arrows slightly larger */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+}

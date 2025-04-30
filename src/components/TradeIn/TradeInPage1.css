@@ -1,0 +1,48 @@
+.trade-in-container {
+    background-image: url('https://ringconn.com/cdn/shop/files/ringconn_trade_in.png?v=1742191830&width=1400');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-left: 10%; /* Content will appear on the left side */
+    color: black;
+    font-family: Arial, sans-serif;
+  }
+  
+  .trade-in-content {
+    max-width: 500px;
+  }
+  
+  .trade-in-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .subtext {
+    font-size: 1.10rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .divider {
+    height: 1px;
+   
+    margin: 30px 0;
+    width: 80%;
+  }
+  
+  .buy-now-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-now-button:hover {
+    background-color: #0056b3;
+  }

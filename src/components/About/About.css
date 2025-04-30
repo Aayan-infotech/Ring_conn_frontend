@@ -1,3 +1,27 @@
-.img-about-us{
+
+
+.img-about-us {
   width: 100%;
+  height: auto;
+}
+
+.about-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.about-overlay-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.about-overlay-text p {
+  font-size: 1.5rem;
 }

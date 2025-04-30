@@ -1,0 +1,47 @@
+.tradein-locations {
+    /* max-width: 800px; */
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .locations-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+  }
+  
+  .locations-subtext {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .location-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+  }
+  
+  .location-section {
+    margin-bottom: 20px;
+  }
+  
+  .location-region {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000;
+  }
+  
+  .location-address {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .location-contact {
+    font-size: 16px;
+    color: #555;
+  }

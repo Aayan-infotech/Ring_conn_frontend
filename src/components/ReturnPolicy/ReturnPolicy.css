@@ -1,0 +1,73 @@
+.ringconn-policy-container {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.ringconn-policy-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  /* border-bottom: 1px solid #eaeaea; */
+}
+
+.ringconn-policy-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.ringconn-policy-section {
+  margin-bottom: 30px;
+}
+
+.ringconn-policy-subtitle {
+  font-size: 24px;
+  margin: 25px 0 15px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.ringconn-policy-subheading {
+  font-size: 20px;
+  margin: 20px 0 12px;
+  color: #2c3e50;
+}
+
+.ringconn-policy-text {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.ringconn-policy-list {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.ringconn-policy-list-item {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .ringconn-policy-container {
+      padding: 15px;
+  }
+  
+  .ringconn-policy-title {
+      font-size: 24px;
+  }
+  
+  .ringconn-policy-subtitle {
+      font-size: 22px;
+  }
+  
+  .ringconn-policy-subheading {
+      font-size: 18px;
+  }
+}
