@@ -13,7 +13,7 @@ export default function Blog() {
 
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("http://3.223.253.106:1111/api/blog/getAllBlogs");
+      const res = await fetch("http://18.209.91.97:1111/api/blog/getAllBlogs");
       const data = await res.json();
 
       if (data.success) {

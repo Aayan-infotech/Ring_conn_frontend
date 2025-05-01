@@ -15,7 +15,7 @@ export default function BlogDetail() {
 
   const fetchBlog = async () => {
     try {
-      const res = await fetch(`http://3.223.253.106:1111/api/blog/getBlog/${id}`);
+      const res = await fetch(`http://18.209.91.97:1111/api/blog/getBlog/${id}`);
       const data = await res.json();
       if (data.success) {
         setBlog(data.blog);
@@ -31,7 +31,7 @@ export default function BlogDetail() {
 
   const fetchRecentBlogs = async () => {
     try {
-      const res = await fetch(`http://3.223.253.106:1111/api/blog/getAllBlogs`);
+      const res = await fetch(`http://18.209.91.97:1111/api/blog/getAllBlogs`);
       const data = await res.json();
       if (data.success) {
         const recent = data.blogs.filter((b) => b._id !== id).slice(0, 3);

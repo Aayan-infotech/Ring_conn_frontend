@@ -34,7 +34,7 @@ export default function Contact() {
 
     try {
       const res = await fetch(
-        "http://3.223.253.106:1111/api/appointment/create",
+        "http://18.209.91.97:1111/api/appointment/create",
         {
           method: "POST",
           headers: {

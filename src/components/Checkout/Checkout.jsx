@@ -79,7 +79,7 @@ export default function Checkout() {
     };
 
     try {
-      const response = await fetch("http://3.223.253.106:1111/api/Addres/add", {
+      const response = await fetch("http://18.209.91.97:1111/api/Addres/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ export default function Checkout() {
     };
 
     try {
-      const response = await fetch("http://3.223.253.106:1111/api/Transaction/create-payment", {
+      const response = await fetch("http://18.209.91.97:1111/api/Transaction/create-payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -31,7 +31,7 @@ const Navbar = () => {
 
     try {
       const response = await fetch(
-        "http://3.223.253.106:1111/api/customer/logout",
+        "http://18.209.91.97:1111/api/customer/logout",
         {
           method: "POST",
           headers: {
@@ -64,7 +64,7 @@ const Navbar = () => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://3.223.253.106:1111/api/Product/getAllProducts"
+          "http://18.209.91.97:1111/api/Product/getAllProducts"
         );
         const data = await response.json();
         if (data.success) {

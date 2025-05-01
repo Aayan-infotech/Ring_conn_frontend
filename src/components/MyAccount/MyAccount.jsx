@@ -30,7 +30,7 @@ export default function MyAccount() {
       toast.error("User not logged in!");
       return;
     }
-    fetch(`http://3.223.253.106:1111/api/Addres/getAddresses/${userId}`)
+    fetch(`http://18.209.91.97:1111/api/Addres/getAddresses/${userId}`)
       .then((res) => res.json())
       .then((data) => setAddresses(data))
       .catch((err) => {
@@ -50,7 +50,7 @@ export default function MyAccount() {
       return;
     }
 
-    fetch("http://3.223.253.106:1111/api/customer/getAllCustomers")
+    fetch("http://18.209.91.97:1111/api/customer/getAllCustomers")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -111,7 +111,7 @@ export default function MyAccount() {
 
   const handleDeleteAddress = (addressId) => {
     if (window.confirm("Are you sure you want to delete this address?")) {
-      fetch(`http://3.223.253.106:1111/api/Addres/deleteAddress/${addressId}`, {
+      fetch(`http://18.209.91.97:1111/api/Addres/deleteAddress/${addressId}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -151,8 +151,8 @@ export default function MyAccount() {
     };
 
     const url = isEditing
-      ? `http://3.223.253.106:1111/api/Addres/update/${currentAddress._id}`
-      : `http://3.223.253.106:1111/api/Addres/add`;
+      ? `http://18.209.91.97:1111/api/Addres/update/${currentAddress._id}`
+      : `http://18.209.91.97:1111/api/Addres/add`;
 
     const method = isEditing ? "PUT" : "POST";
 
@@ -486,7 +486,7 @@ function ChangePassword() {
 
     try {
       const response = await fetch(
-        "http://3.223.253.106:1111/api/customer/change-password",
+        "http://18.209.91.97:1111/api/customer/change-password",
         {
           method: "POST",
           headers: {

@@ -12,7 +12,7 @@ export default function ForgotPassword() {
 
   const handleSendOTP = async () => {
     try {
-      const response = await fetch('http://3.223.253.106:1111/api/customer/forgot-password', {
+      const response = await fetch('http://18.209.91.97:1111/api/customer/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

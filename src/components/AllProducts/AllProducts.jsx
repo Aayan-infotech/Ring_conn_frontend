@@ -12,7 +12,7 @@ export default function AllProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://3.223.253.106:1111/api/Product/getAllProducts');
+        const res = await fetch('http://18.209.91.97:1111/api/Product/getAllProducts');
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);

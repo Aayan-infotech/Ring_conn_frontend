@@ -43,7 +43,7 @@ export default function PaymentSuccessfull() {
 
         const executePayment = async () => {
           try {
-            const response = await fetch("http://3.223.253.106:1111/api/Transaction/execute-payment", {
+            const response = await fetch("http://18.209.91.97:1111/api/Transaction/execute-payment", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

@@ -24,7 +24,7 @@ export default function ProductDetails() {
     const fetchProduct = async () => {
       try {
         const res = await fetch(
-          `http://3.223.253.106:1111/api/Product/getProduct/${id}`
+          `http://18.209.91.97:1111/api/Product/getProduct/${id}`
         );
         const data = await res.json();
         if (data.success) {
@@ -74,7 +74,7 @@ export default function ProductDetails() {
 
     try {
       const response = await fetch(
-        "http://3.223.253.106:1111/api/Cart/createCart",
+        "http://18.209.91.97:1111/api/Cart/createCart",
         {
           method: "POST",
           headers: {

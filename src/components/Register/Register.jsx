@@ -37,7 +37,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('http://3.223.253.106:1111/api/customer/register', {
+      const response = await fetch('http://18.209.91.97:1111/api/customer/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ export default function Register() {
 
   const handleVerifyOtp = async () => {
     try {
-      const response = await fetch('http://3.223.253.106:1111/api/customer/verify-otp', {
+      const response = await fetch('http://18.209.91.97:1111/api/customer/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

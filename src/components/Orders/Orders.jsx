@@ -11,7 +11,7 @@ export default function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`http://3.223.253.106:1111/api/Order/history/${userId}`);
+        const response = await axios.get(`http://18.209.91.97:1111/api/Order/history/${userId}`);
         setOrders(response.data.data);
       } catch (error) {
         console.error('Error fetching orders:', error);

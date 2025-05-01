@@ -13,7 +13,7 @@ export default function News() {
 
   const fetchNews = async () => {
     try {
-      const res = await fetch("http://3.223.253.106:1111/api/news/getAllNews");
+      const res = await fetch("http://18.209.91.97:1111/api/news/getAllNews");
       const data = await res.json();
       if (data.success) {
         setNewsList(data.news);

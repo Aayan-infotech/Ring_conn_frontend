@@ -9,7 +9,7 @@ export default function HomeSection1() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://3.223.253.106:1111/api/Product/getAllProducts")
+    fetch("http://18.209.91.97:1111/api/Product/getAllProducts")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

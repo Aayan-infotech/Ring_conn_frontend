@@ -14,7 +14,7 @@ export default function Cart() {
 
   useEffect(() => {
     if (userId) {
-      fetch(`http://3.223.253.106:1111/api/Cart/getCartByUserId/${userId}`)
+      fetch(`http://18.209.91.97:1111/api/Cart/getCartByUserId/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.success && data.data.length > 0) {
@@ -42,7 +42,7 @@ export default function Cart() {
   }, [cartItems]);
 
   const handleUpdate = (itemId, newQuantity, newSize) => {
-    fetch(`http://3.223.253.106:1111/api/Cart/updateCart/${userId}/${itemId}`, {
+    fetch(`http://18.209.91.97:1111/api/Cart/updateCart/${userId}/${itemId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export default function Cart() {
   };
 
   const handleRemoveItem = (itemId) => {
-    fetch(`http://3.223.253.106:1111/api/Cart/deleteCart/${userId}/${itemId}`, {
+    fetch(`http://18.209.91.97:1111/api/Cart/deleteCart/${userId}/${itemId}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
