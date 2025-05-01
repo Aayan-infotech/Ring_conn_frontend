@@ -38,6 +38,8 @@ import Care2 from "../components/Care/Care2";
 import Care3 from "../components/Care/Care3";
 import Care4 from "../components/Care/Care4";
 import Care5 from "../components/Care/Care5";
+import Distributors from "../components/Distributors/Distributors";
+import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
 
 function AppRoutes() {
   const location = useLocation();
@@ -108,6 +110,8 @@ function AppRoutes() {
         <Route path="/careplus3" element={<Care3 />} />
         <Route path="/careplus4" element={<Care4 />} />
         <Route path="/careplus5" element={<Care5 />} />
+        <Route path="/distributors" element={<Distributors />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         <Route path="/payment-successful" element={<PaymentSuccessfull />} />
         <Route path="/payment-fail" element={<PaymentCancel />} />

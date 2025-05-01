@@ -34,13 +34,8 @@
 //   return (
 //     <div className="home-section-2 container">
 //       <div className="home-section-header">
-//         <h2>TRENDING PRODUCTS</h2>
-//         <div className="category-tabs">
-//           <span className="active">ALL</span>
-//           <span>POPULAR</span>
-//           <span>SALE</span>
-//           <span>NEW</span>
-//         </div>
+//         <h2>Explore Our Products</h2>
+
 //       </div>
 
 //       <Swiper
@@ -84,23 +79,25 @@
 //   );
 // }
 
-import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import './HomeSection2.css';
- 
+import React, { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./HomeSection2.css";
+
 export default function HomeSection2() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://18.209.91.97:1111/api/Product/getAllProducts");
+        const res = await fetch(
+          "http://18.209.91.97:1111/api/Product/getAllProducts"
+        );
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
@@ -109,21 +106,27 @@ export default function HomeSection2() {
         console.error("Failed to fetch products:", err);
       }
     };
- 
+
     fetchProducts();
   }, []);
- 
+
   const handleViewProduct = (productId) => {
     navigate(`/product/${productId}`);
   };
- 
+
+  const handleViewAllProducts = () => {
+    navigate("/allproducts");
+  };
+
   return (
     <div className="home-section-2 container">
       <div className="home-section-header">
         <h2>Explore Our Products</h2>
-       
+        <button className="btn view-all-btn" onClick={handleViewAllProducts}>
+          View All Products
+        </button>
       </div>
- 
+
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={20}
@@ -147,8 +150,8 @@ export default function HomeSection2() {
               />
               <h3 className="product-title">{product.title}</h3>
               <div className="product-rating">
-                {'★'.repeat(4)}
-                {'☆'.repeat(1)}
+                {"★".repeat(4)}
+                {"☆".repeat(1)}
               </div>
               <p className="product-price">${product.price}</p>
               <button

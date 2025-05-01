@@ -1,0 +1,127 @@
+
+.distributors-container {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.distributors-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.distributors-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+}
+
+.become-distributor {
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contact-email {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.email-link {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.distributors-table,
+.retailers-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 3rem;
+}
+
+.table-header {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.table-data {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.region-header {
+  background-color: #e9ecef;
+}
+
+.region-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+}
+
+.table-link {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .distributors-container {
+    padding: 1rem;
+  }
+  
+  .distributors-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .table-header,
+  .table-data {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header,
+  .table-data {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .region-title {
+    font-size: 1rem;
+  }
+}

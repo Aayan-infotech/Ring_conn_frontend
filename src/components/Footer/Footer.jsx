@@ -119,13 +119,13 @@ function Footer() {
             <h6 className="footer-heading footer-title">Support</h6>
             <ul className="footer-links">
               <li>
-                <Link to="/privacy">Privacy Policy</Link>
+                <Link to="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/returns">Returns & Refunds</Link>
+                <Link to="/return-policy">Returns & Refunds</Link>
               </li>
               <li>
-                <Link to="/shipping">Shipping Info</Link>
+                <Link to="/shipping-policy">Shipping Info</Link>
               </li>
               <li>
                 <Link to="/terms">Terms of Service</Link>
@@ -158,7 +158,7 @@ function Footer() {
                 <Link to="/contact">Contact Us</Link>
               </li>
               <li>
-                <Link to="/distributers">Distributors</Link>
+                <Link to="/distributors">Distributors</Link>
               </li>
             </ul>
           </div>
