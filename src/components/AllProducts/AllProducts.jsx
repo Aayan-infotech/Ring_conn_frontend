@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AllProducts.css';
 
 export default function AllProducts() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -36,13 +37,23 @@ export default function AllProducts() {
     }
 
     if (selectedColor) {
-      filtered = filtered.filter(product =>
-        product.colorPallets.some(color => color.color === selectedColor)
-      );
+      filtered = filtered
+        .filter(product =>
+          product.colorPallets.some(c => c.color === selectedColor)
+        )
+        .map(product => ({
+          ...product,
+          images: [
+            product.colorPallets.find(c => c.color === selectedColor)?.images
+          ],
+          colorPallets: product.colorPallets.filter(c => c.color === selectedColor)
+        }));
     }
 
     if (selectedSize) {
-      filtered = filtered.filter(product => product.size.includes(selectedSize));
+      filtered = filtered.filter(product =>
+        product.size.includes(selectedSize)
+      );
     }
 
     setFilteredProducts(filtered);
@@ -61,31 +72,76 @@ export default function AllProducts() {
           placeholder="Search by title..."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
+          className="search-input"
         />
 
-        <select value={selectedSize} onChange={e => setSelectedSize(e.target.value)}>
+        <select
+          value={selectedSize}
+          onChange={e => setSelectedSize(e.target.value)}
+          className="filter-select"
+        >
           <option value="">Filter by Size</option>
           {getAllSizes().map(size => (
             <option key={size} value={size}>{size}</option>
           ))}
         </select>
 
-        <select value={selectedColor} onChange={e => setSelectedColor(e.target.value)}>
+        <select
+          value={selectedColor}
+          onChange={e => setSelectedColor(e.target.value)}
+          className="filter-select"
+        >
           <option value="">Filter by Color</option>
           {getAllColors().map(color => (
             <option key={color} value={color}>{color}</option>
           ))}
         </select>
+
+        {(selectedColor || selectedSize || searchTerm) && (
+          <button
+            onClick={() => {
+              setSearchTerm('');
+              setSelectedColor('');
+              setSelectedSize('');
+            }}
+            className="clear-filters"
+          >
+            Clear Filters
+          </button>
+        )}
       </div>
 
       <div className="product-grid">
-        {filteredProducts.map(product => (
-          <div key={product._id} className="product-card-2">
-            <img src={product.images[0]} alt={product.title} className="product-image-2" />
-            <h4 className="product-title-2">{product.title}</h4>
-            <p className="product-price">${product.price}</p>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map(product => (
+            <div key={product._id} className="product-card-2">
+              <img
+                src={
+                  product.colorPallets.length > 0
+                    ? product.colorPallets[0].images
+                    : product.images[0]
+                }
+                alt={product.title}
+                className="product-image-2"
+              />
+              <h4 className="product-title-2">{product.title}</h4>
+              <p className="product-price">${product.price}</p>
+              <div className="product-colors">
+                Color: {product.colorPallets.map(c => c.color).join(', ')}
+              </div>
+              <button
+                className="view-product-btn"
+                onClick={() => navigate(`/product/${product._id}`)}
+              >
+                View Product
+              </button>
+            </div>
+          ))
+        ) : (
+          <div className="no-results">
+            No products match your filters. Try adjusting your search criteria.
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
